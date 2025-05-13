@@ -44,12 +44,12 @@ class UNetLabelMake(object):
             inst_map = remove_small_objects(inst_map, 5)
             inst_map = np.array(inst_map, np.uint8)
             remapped_ids = measure.label(inst_map)
-            remapped_ids[remapped_ids > 0] += cur
+            remapped_ids[remapped_ids > 0] = inst_id
             new_inst_gt[remapped_ids > 0] = remapped_ids[remapped_ids > 0]
-            cur += len(np.unique(remapped_ids[remapped_ids > 0]))
+            # cur += len(np.unique(remapped_ids[remapped_ids > 0]))
 
         return new_inst_gt
-
+    
     def _remove_1px_boundary(self, inst_gt):
         new_gt = np.zeros(inst_gt.shape[:2], np.int32)
         inst_ids = list(np.unique(inst_gt))
@@ -95,11 +95,20 @@ class UNetLabelMake(object):
         return pen_map
 
     def __call__(self, data):
+        # print("data", data.keys())
+        # print("=" * 100)
         inst_gt = data['inst_gt']
         sem_gt = data['sem_gt']
+        # adj_gt = data['adj_gt']
+        # print("sem gt", np.unique(sem_gt))
         inst_gt = self._fix_inst(inst_gt)
         sem_gt[inst_gt == 0] = 0
         data['sem_gt'] = sem_gt
+
+        # import matplotlib.pyplot as plt
+        # plt.imshow(inst_gt)
+        # plt.show()
+        # plt.savefig("z_gt.png")
 
         # setting 1 boundary pix of each instance to background
         inst_gt = self._remove_1px_boundary(inst_gt)
@@ -120,8 +129,24 @@ class UNetLabelMake(object):
                 class_weights[inst_gt == class_id] = class_w
             wmap += class_weights
 
+        # class_weights = np.zeros_like(sem_gt)
+        # # print("sem gt", sem_gt.shape)
+        # # print("class w", class_weights.shape)
+        # for class_id, class_w in self.wc.items():
+        #     # print("class id", class_id)
+        #     # print("class_w", class_w)
+        #     class_weights[sem_gt == class_id] = class_w
+
+        # print("class weight", np.unique(class_weights))
+        # wmap += class_weights
+        
+
+        # data['loss_weight_map'] = class_weights
         data['loss_weight_map'] = wmap
         data['sem_gt_inner'] = sem_gt_inner
+        data['inst_gt'] = inst_gt
         data['seg_fields'].append('sem_gt_inner')
+        # data['adj_gt'] = adj_gt
+
 
         return data

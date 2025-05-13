@@ -32,6 +32,9 @@ def draw_all(save_folder,
              tc_sem_gt,
              edge_id=2,
              sem_palette=None):
+    
+    sem_gt[sem_gt>2] = 2
+    # print("sem gt", np.unique(sem_gt))
 
     plt.figure(figsize=(5 * 4, 5 * 2 + 3))
 
@@ -87,7 +90,7 @@ def draw_all(save_folder,
     plt.axis('off')
     plt.title('Semantic Level Ground Truth')
 
-    tc_palette = [(0, 0, 0), (0, 255, 0), (255, 0, 0)]
+    tc_palette = [(0, 0, 0), (0, 255, 0), (255, 0, 0), (0,0,255), (255,0,255)]
 
     plt.subplot(247)
     plt.imshow(colorize_seg_map(tc_sem_pred, tc_palette))

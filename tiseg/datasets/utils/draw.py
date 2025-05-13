@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 
 def colorize_seg_map(seg_map, palette=None):
     """using random rgb color to colorize segmentation map."""
+    # print("seg map", seg_map.shape, np.unique(seg_map))
+    # print("palette", palette)
     colorful_seg_map = np.zeros((*seg_map.shape, 3), dtype=np.uint8)
     id_list = list(np.unique(seg_map))
 
@@ -15,6 +17,7 @@ def colorize_seg_map(seg_map, palette=None):
         for id in id_list:
             color = [random.random() * 255 for i in range(3)]
             palette[id] = color
+    
 
     for id in id_list:
         # ignore background
@@ -96,6 +99,8 @@ class Drawer(object):
         plt.title('Semantic Level Ground Truth')
 
         tc_palette = [(0, 0, 0), (0, 255, 0), (255, 0, 0)]
+
+        
 
         plt.subplot(247)
         plt.imshow(colorize_seg_map(tc_sem_pred, tc_palette))

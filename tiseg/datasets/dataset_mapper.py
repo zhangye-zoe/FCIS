@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 
 from .ops import class_dict
+import yaml
 
 
 def read_image(path):
@@ -38,7 +39,21 @@ class DatasetMapper(object):
 
         img = read_image(data_info['file_name'])
         sem_gt = read_image(data_info['sem_file_name'])
+        # print("file name", data_info['sem_file_name'])
+        # print(np.unique(sem_gt))
+
+
         inst_gt = read_image(data_info['inst_file_name'])
+        # import matplotlib.pyplot as plt
+        # plt.imshow(inst_gt)
+        # plt.show()
+        # plt.savefig("z_gt1.png")
+        with open(data_info['adj_file_name'], "r") as file:
+            adj_gt = yaml.load(file, Loader=yaml.FullLoader)
+
+        # dis_gt = read_image(data_info['dis_file_name'])
+        # print("adj_gt", adj_gt)
+        # print("=" * 200)
 
         data_info['ori_hw'] = img.shape[:2]
 
@@ -49,10 +64,15 @@ class DatasetMapper(object):
             'img': img,
             'sem_gt': sem_gt,
             'inst_gt': inst_gt,
+            'adj_gt': adj_gt,
+            # 'dis_gt': dis_gt,
             'seg_fields': ['sem_gt', 'inst_gt'],
             'data_info': data_info
         }
+        # print("data process", self.processes)
+        # print("=" * 200)
         for process in self.processes:
             data = process(data)
+
 
         return data

@@ -72,6 +72,10 @@ class BatchMultiClassDiceLoss(nn.Module):
     def forward(self, logit, target, weights=None):
         assert target.ndim == 3
         # one-hot encoding for target
+        # target_one_hot = _convert_to_one_hot(target, 2).permute(0, 3, 1, 2).contiguous()
+        # print('target', torch.unique(target))
+        # print('number', self.num_classes)
+        # print('=' * 100)
         target_one_hot = _convert_to_one_hot(target, self.num_classes).permute(0, 3, 1, 2).contiguous()
         smooth = 1e-4
         # softmax for logit
@@ -79,9 +83,12 @@ class BatchMultiClassDiceLoss(nn.Module):
 
         N, C, _, _ = target_one_hot.shape
 
+        # print("target shape", target_one_hot.shape)
+
         loss = 0
 
         for i in range(1, C):
+            # print("c shape", C, i)
             logit_per_class = logit[:, i]
             target_per_class = target_one_hot[:, i]
 

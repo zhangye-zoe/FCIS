@@ -13,7 +13,7 @@ def test_inf_time(data_loader, model, log_interval):
     # the first several iterations may be very slow so skip them
     num_warmup = 5
     pure_inf_time = 0
-    total_iters = 200
+    total_iters = 10
 
     # benchmark with 200 image and take the average
     for i, data in enumerate(data_loader):
@@ -55,7 +55,7 @@ def main():
     cfg = Config.fromfile(args.config)
     # set cudnn_benchmark
     torch.backends.cudnn.benchmark = False
-    cfg.model.pretrained = None
+    # cfg.model.pretrained = None
     cfg.data.test.test_mode = True
 
     # model prepare

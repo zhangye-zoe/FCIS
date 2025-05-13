@@ -255,6 +255,10 @@ class HoverNet(BaseSegmentor):
             loss.update(sem_loss)
             # direction branch loss calculation
             hv_loss = self._hv_loss(hv_logit, hv_gt, fore_gt)
+
+            print("hv logit", hv_logit.shape)
+            print("hv gt", hv_gt.shape)
+            print("fore gt", fore_gt.shape)
             loss.update(hv_loss)
             # point branch loss calculation
             fore_loss = self._fore_loss(fore_logit, fore_gt)

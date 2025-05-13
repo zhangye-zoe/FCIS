@@ -88,9 +88,12 @@ class UNetHead(nn.Module):
                               act_cfg))
 
         if self.num_classes is not None:
+            self.cls_layer = nn.Conv2d(self.stage_dims[0], self.num_classes, kernel_size=1, stride=1)
+            self.sem_layer = nn.Conv2d(self.num_classes-1, 2, kernel_size=1, stride=1)
             self.postprocess = nn.Conv2d(self.stage_dims[0], self.num_classes, kernel_size=1, stride=1)
+            # self.dis_layer = nn.Conv2d(self.stage_dims[0], 2, kernel_size=1, stride=1)
 
-    def forward(self, bottom_input, skip_inputs):
+    def forward(self, bottom_input, skip_inputs, encoding=None):
         # decode stage feed forward
         x = bottom_input
         skips = skip_inputs[::-1]
@@ -99,8 +102,19 @@ class UNetHead(nn.Module):
         for skip, decode_stage in zip(skips, decode_layers):
             x = decode_stage(x, skip)
 
-        out = x
+        out = x 
+        
+        if encoding is not None:
+            device = out.device
+            print(" Using image encoding ......")
+            pos_encode = encoding.repeat(out.shape[0], 1, 1, 1).to(device)
+            out = torch.cat((out, pos_encode), dim=1)
+
+        # if self.num_classes is not None:
+        #     cls_pred = self.cls_layer(out)
+
         if self.num_classes is not None:
             out = self.postprocess(out)
 
-        return out
+        # return out, cls_pred
+        return None, out

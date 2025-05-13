@@ -180,6 +180,7 @@ class DCAN(BaseSegmentor):
             assert metas is not None
             # NOTE: only support batch size = 1 now.
             cell_logit, cont_logit = self.inference(data['img'], metas[0], True)
+            np.save("z_contour.npy", cont_logit.detach().cpu().numpy())
             cell_pred = cell_logit.argmax(dim=1)
             cont_pred = cont_logit.argmax(dim=1)
             cell_pred = cell_pred.cpu().numpy()[0]

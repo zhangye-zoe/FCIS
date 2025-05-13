@@ -10,7 +10,7 @@ from ..builder import SEGMENTORS
 from ..heads import UNetHead
 from ..losses import BatchMultiClassDiceLoss
 from .base import BaseSegmentor
-
+import torch.nn.functional as F
 
 @SEGMENTORS.register_module()
 class UNet(BaseSegmentor):
@@ -31,26 +31,31 @@ class UNet(BaseSegmentor):
             act_cfg=dict(type='ReLU'),
             norm_cfg=dict(type='BN'))
 
-    def calculate(self, img):
+    def calculate(self, img, encodint=None):
         img_feats = self.backbone(img)
         bottom_feat = img_feats[-1]
         skip_feats = img_feats[:-1]
-        mask_logit = self.head(bottom_feat, skip_feats)
+        mask_feature, mask_logit = self.head(bottom_feat, skip_feats)
 
-        return mask_logit
+        return mask_feature, mask_logit
 
     def forward(self, data, label=None, metas=None, **kwargs):
         """detectron2 style forward functions. Segmentor can be see as meta_arch of detectron2.
         """
+        # print("data", label.keys())
+        # print("=" * 100)
         if self.training:
-            sem_logit = self.calculate(data['img'])
+            sem_feature, sem_logit = self.calculate(data['img'])
             assert label is not None
             sem_gt_wb = label['sem_gt_inner']
             weight_map = label['loss_weight_map']
+            
             loss = dict()
             sem_gt_wb = sem_gt_wb.squeeze(1)
             sem_loss = self._sem_loss(sem_logit, sem_gt_wb, weight_map)
+            
             loss.update(sem_loss)
+
             # calculate training metric
             training_metric_dict = self._training_metric(sem_logit, sem_gt_wb)
             loss.update(training_metric_dict)
@@ -58,11 +63,35 @@ class UNet(BaseSegmentor):
         else:
             assert metas is not None
             # NOTE: only support batch size = 1 now.
-            sem_logit = self.inference(data['img'], metas[0], True)
+            _, sem_logit = self.inference(data['img'], metas[0], True)
+            # print("shape", sem_logit.shape)
+            # import matplotlib.pyplot as plt
+            # plt.imshow(sem_logit.cpu().numpy()[0,1,...])
+            # plt.show()
+            # plt.savefig("z_1.png")
+
+            # plt.imshow(sem_logit.cpu().numpy()[0,2,...])
+            # plt.show()
+            # plt.savefig("z_2.png")
+
+            # plt.imshow(sem_logit.cpu().numpy()[0,3,...])
+            # plt.show()
+            # plt.savefig("z_3.png")
+
+            # plt.imshow(sem_logit.cpu().numpy()[0,4,...])
+            # plt.show()
+            # plt.savefig("z_4.png")
+
+
+
             sem_pred = sem_logit.argmax(dim=1)
             # Extract inside class
             sem_pred = sem_pred.cpu().numpy()[0]
             sem_pred, inst_pred = self.postprocess(sem_pred)
+            # plt.imshow(sem_pred)
+            # plt.show()
+            # plt.savefig("z_2.png")
+
             # unravel batch dim
             ret_list = []
             ret_list.append({'sem_pred': sem_pred, 'inst_pred': inst_pred})

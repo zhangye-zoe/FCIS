@@ -6,7 +6,20 @@ from .monuseg import MoNuSegDataset
 from .conic import CoNICDataset
 from .oscd import OSCDDataset
 from .glas import GlasDataset
+from .livercell import LiverCellDataset
+from .dsb import DSBDataset
+from .pannuke import PanNukeDataset
+from .tissuenet import TissueNetDataset
+from .bbbc import BBBCDataset
 from .monuseg_debug import MoNuSegDatasetDebug
+
+
+from .fcis_livercell import FCISLiverCellDataset
+from .fcis_dsb import FCISDSBDataset
+from .fcis_pannuke import FCISPanNukeDataset
+from .fcis_bbbc import FCISBBBCDataset
+from .fcis_mp import FCISMPDataset
+from .fcis_nat import FCISNatDataset
 
 __all__ = [
     'DATASETS',
@@ -20,5 +33,16 @@ __all__ = [
     'CoNICDataset',
     'OSCDDataset',
     'GlasDataset',
+    'LiverCellDataset'
+    'DSBDataset',
+    'PanNukeDataset',
+    'BBBCataset',
+    'TissueNetDataset',
     'MoNuSegDatasetDebug',
+    'FCISLiverCellDataset',
+    'FCISDSBDataset',
+    'FCISPanNukeDataset',
+    'FCISBBBCDataset',
+    'FCISMPDataset',
+    'FCISNatDataset'
 ]

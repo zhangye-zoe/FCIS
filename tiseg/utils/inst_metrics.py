@@ -588,7 +588,10 @@ def pre_eval_to_imw_inst_dice(pre_eval_results, nan_to_num=None):
     ret_metrics = {}
     ret_metrics['InstDice'] = []
     for tp, fp, fn in zip(tp_list, fp_list, fn_list):
-        inst_dice = 2 * tp / (2 * tp + fp + fn)
+        if tp + fp + fn == 0:
+            inst_dice = 1.0
+        else:
+            inst_dice = 2 * tp / (2 * tp + fp + fn)
         ret_metrics['InstDice'].append(inst_dice)
 
     ret_metrics['InstDice'] = np.array(ret_metrics['InstDice'])
@@ -616,7 +619,10 @@ def pre_eval_to_inst_dice(pre_eval_results, nan_to_num=None):
     fn = sum(pre_eval_results[2])
 
     ret_metrics = {}
-    ret_metrics['InstDice'] = 2 * tp / (2 * tp + fp + fn)
+    if tp + fp + fn == 0:
+        ret_metrics['InstDice'] = 1.0
+    else:
+        ret_metrics['InstDice'] = 2 * tp / (2 * tp + fp + fn)
 
     if nan_to_num is not None:
         ret_metrics = OrderedDict(

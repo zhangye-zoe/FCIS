@@ -252,7 +252,7 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
     #     return preds
 
     # NOTE: old style split inference
-    def split_inference(self, img, meta, rescale):
+    def split_inference(self, img, meta, rescale, encoding=None):
         """using half-and-half strategy to slide inference."""
         window_size = self.test_cfg.crop_size[0]
         overlap_size = self.test_cfg.overlap_size[0]
@@ -275,7 +275,13 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
         img_canvas = torch.zeros((B, C, H1, W1), dtype=img.dtype, device=img.device)
         img_canvas[:, :, pad_h // 2:pad_h // 2 + H, pad_w // 2:pad_w // 2 + W] = img
 
-        sem_logit = torch.zeros((B, self.num_classes, H1, W1), dtype=img.dtype, device=img.device)
+        sem_logit = torch.zeros((B, 2, H1, W1), dtype=img.dtype, device=img.device)
+        cls_logit = torch.zeros((B, self.num_classes, H1, W1), dtype=img.dtype, device=img.device)
+
+        # sem_logit = torch.zeros((B, 16, H1, W1), dtype=img.dtype, device=img.device)
+        # cls_logit = torch.zeros((B, 2, H1, W1), dtype=img.dtype, device=img.device)
+
+        # sem_feas = torch.zeros((B, 16, H1, W1), dtype=img.dtype, device=img.device)
         for i in range(0, H1 - overlap_size, window_size - overlap_size):
             r_end = i + window_size if i + window_size < H1 else H1
             ind1_s = i + overlap_size // 2 if i > 0 else 0
@@ -284,15 +290,23 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
                 c_end = j + window_size if j + window_size < W1 else W1
 
                 img_patch = img_canvas[:, :, i:r_end, j:c_end]
-                sem_patch = self.calculate(img_patch)
+                sem_pred, cls_pred = self.calculate(img_patch, encoding)
 
                 ind2_s = j + overlap_size // 2 if j > 0 else 0
                 ind2_e = (j + window_size - overlap_size // 2 if j + window_size < W1 else W1)
-                sem_logit[:, :, ind1_s:ind1_e, ind2_s:ind2_e] = sem_patch[:, :, ind1_s - i:ind1_e - i,
+                sem_logit[:, :, ind1_s:ind1_e, ind2_s:ind2_e] = sem_pred[:, :, ind1_s - i:ind1_e - i,
                                                                           ind2_s - j:ind2_e - j]
+                cls_logit[:, :, ind1_s:ind1_e, ind2_s:ind2_e] = cls_pred[:, :, ind1_s - i:ind1_e - i,
+                                                                          ind2_s - j:ind2_e - j]
+                # sem_feas[:, :, ind1_s:ind1_e, ind2_s:ind2_e] = sem_faeture[:, :, ind1_s - i:ind1_e - i,
+                #                                                           ind2_s - j:ind2_e - j]
 
         sem_logit = sem_logit[:, :, (H1 - H) // 2:(H1 - H) // 2 + H, (W1 - W) // 2:(W1 - W) // 2 + W]
-        return sem_logit
+        cls_logit = cls_logit[:, :, (H1 - H) // 2:(H1 - H) // 2 + H, (W1 - W) // 2:(W1 - W) // 2 + W]
+        
+        return sem_logit, cls_logit
+
+        # return None, cls_logit
 
     def whole_inference(self, img, meta, rescale):
         """Inference with full image."""
@@ -301,7 +315,7 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
 
         return sem_logit
 
-    def inference(self, img, meta, rescale):
+    def inference(self, img, meta, rescale, encoding=None):
         """Inference with split/whole style.
 
         Args:
@@ -317,6 +331,7 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
         self.rotate_degrees = self.test_cfg.get('rotate_degrees', [0])
         self.flip_directions = self.test_cfg.get('flip_directions', ['none'])
         sem_logit_list = []
+        cls_logit_list = []
         img_ = img
         for rotate_degree in self.rotate_degrees:
             for flip_direction in self.flip_directions:
@@ -324,21 +339,32 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
 
                 # inference patch or whole img
                 if self.test_cfg.mode == 'split':
-                    sem_logit = self.split_inference(img, meta, rescale)
+                    # if encoding is not None:
+                    sem_logit, cls_logit = self.split_inference(img, meta, rescale, encoding)
                 else:
                     sem_logit = self.whole_inference(img, meta, rescale)
+                    
+                # return None
 
                 sem_logit = self.reverse_tta_transform(sem_logit, rotate_degree, flip_direction)
-                sem_logit = F.softmax(sem_logit, dim=1)
+                cls_logit = self.reverse_tta_transform(cls_logit, rotate_degree, flip_direction)
 
+                sem_logit = F.softmax(sem_logit, dim=1)
+                cls_logit = F.softmax(cls_logit, dim=1)
                 sem_logit_list.append(sem_logit)
+                cls_logit_list.append(cls_logit)
+                
 
         sem_logit = sum(sem_logit_list) / len(sem_logit_list)
+        cls_logit = sum(cls_logit_list) / len(cls_logit_list)
 
         if rescale:
+            # sem_feature = resize(sem_feature, size=meta['ori_hw'], mode='bilinear', align_corners=False)
             sem_logit = resize(sem_logit, size=meta['ori_hw'], mode='bilinear', align_corners=False)
+            cls_logit = resize(cls_logit, size=meta['ori_hw'], mode='bilinear', align_corners=False)
 
-        return sem_logit
+
+        return sem_logit, cls_logit
 
     @classmethod
     def tta_transform(self, img, rotate_degree, flip_direction):
@@ -387,6 +413,9 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
         # loss
         clean_sem_logit = sem_logit.clone().detach()
         clean_sem_label = sem_label.clone().detach()
+
+        # print("clean sem logit", clean_sem_logit.shape)
+        # print("clean sem label", clean_sem_label.shape)
 
         wrap_dict['sem_tdice'] = tdice(clean_sem_logit, clean_sem_label, self.num_classes)
         wrap_dict['sem_mdice'] = mdice(clean_sem_logit, clean_sem_label, self.num_classes)

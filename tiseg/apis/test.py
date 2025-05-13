@@ -26,10 +26,24 @@ def single_gpu_test(model, data_loader, pre_eval=False, pre_eval_args={}):
     prog_bar = mmcv.ProgressBar(len(dataset))
     loader_indices = data_loader.batch_sampler
 
+    total_time = 0
     for batch_indices, data in zip(loader_indices, data_loader):
         with torch.no_grad():
+            
+            
+            # import time
+            # start_time = time.time()
+            
             result = model(**data)
 
+            # end_time = time.time()
+            # inference_time = end_time - start_time
+            # total_time += inference_time
+            
+            # print(f"  Inference time of current image: {inference_time:.4f} seconds")
+            
+    
+            
         if pre_eval:
             # TODO: adapt samples_per_gpu > 1.
             # only samples_per_gpu=1 valid now
@@ -40,6 +54,7 @@ def single_gpu_test(model, data_loader, pre_eval=False, pre_eval_args={}):
         batch_size = len(result)
         for _ in range(batch_size):
             prog_bar.update()
+    print(f"  Average inference time: {total_time/10:.4f} seconds")
 
     return results
 

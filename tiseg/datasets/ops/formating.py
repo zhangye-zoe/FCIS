@@ -83,6 +83,12 @@ def format_info(info, dc=True):
 
     return info
 
+def format_adj(adj, dc=True):
+    # adj = to_tensor(adj)
+    if dc:
+        adj = DC(adj, cpu_only=True)
+        
+    return adj
 
 class Formatting(object):
 
@@ -92,7 +98,11 @@ class Formatting(object):
 
     def __call__(self, data):
         ret = {'data': {}, 'label': {}, 'metas': {}}
+        # print("data", data.keys())
+        # print("=" * 100)
         data_info = data.pop('data_info')
+        # print("data info", data_info["data_id"])
+        # print("+" * 300)
         _ = data.pop('seg_fields')
 
         for data_key in self.data_keys:
@@ -104,10 +114,36 @@ class Formatting(object):
                 ret['data'][data_key] = format_(data[data_key])
 
         for label_key in self.label_keys:
-            if label_key in ['dist_gt', 'point_gt', 'hv_gt', 'loss_weight_map']:
+            if label_key in ['dist_gt', 'point_gt', 'hv_gt', 'loss_weight_map', 'dis_gt']:
                 ret['label'][label_key] = format_reg(data[label_key])
+            
+            elif label_key in ['adj_gt']:
+                ret['label'][label_key] = format_adj(data['adj_gt'])
+
             else:
+                # import matplotlib.pyplot as plt
+                # print("data info", data_info["data_id"])
+                # print("+" * 300)
+                # if label_key == "inst_gt":
+                #     plt.imshow(data[label_key])
+                #     plt.show()
+                #     plt.savefig("z_before.png")
+
+
                 ret['label'][label_key] = format_seg(data[label_key])
+
+                # if label_key == "inst_gt":
+                #     seg2 = data[label_key]
+                #     if len(seg2) < 3:
+                #         seg2 = seg2[None, ...]
+                #     # segmentation gt convert to long
+
+                #     seg2 = to_tensor(seg2.astype(np.int64))
+                                    
+
+                #     plt.imshow(seg2)
+                #     plt.show()
+                #     plt.savefig("z_after.png")
 
         ret['metas'] = format_info(data_info)
 
