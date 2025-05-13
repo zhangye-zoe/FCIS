@@ -1,22 +1,30 @@
+# .pre-commit-config.yaml
+# Configuration for pre-commit hooks
+
 repos:
   - repo: https://gitlab.com/pycqa/flake8.git
+    # Check the repo for the latest stable release tag
     rev: 3.8.3
     hooks:
       - id: flake8
   - repo: https://github.com/asottile/seed-isort-config
+    # Check the repo for the latest stable release tag
     rev: v2.2.0
     hooks:
       - id: seed-isort-config
         args: ["--exclude", ".dev"]
   - repo: https://github.com/timothycrosley/isort
+    # Check the repo for the latest stable release tag
     rev: 4.3.21
     hooks:
       - id: isort
   - repo: https://github.com/pre-commit/mirrors-yapf
+    # Check the repo for the latest stable release tag
     rev: v0.30.0
     hooks:
       - id: yapf
   - repo: https://github.com/pre-commit/pre-commit-hooks
+    # Check the repo for the latest stable release tag
     rev: v3.1.0
     hooks:
       - id: trailing-whitespace
@@ -30,12 +38,16 @@ repos:
       - id: mixed-line-ending
         args: ["--fix=lf"]
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    # Check the repo for the latest stable release tag
     rev: 2.1.4
     hooks:
       - id: markdownlint
+        # Arguments to disable specific markdownlint rules
         args: ["-r", "~MD002,~MD013,~MD029,~MD033,~MD034,~MD036"]
   - repo: https://github.com/myint/docformatter
+    # Check the repo for the latest stable release tag
     rev: v1.3.1
     hooks:
       - id: docformatter
+        # Arguments for in-place formatting and description wrapping
         args: ["--in-place", "--wrap-descriptions", "79"]
