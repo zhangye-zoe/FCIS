@@ -2,7 +2,6 @@ import argparse
 import os.path as osp
 import random
 
-
 def parse_args():
     parser = argparse.ArgumentParser('sample dataset')
     parser.add_argument('split', help='The split text path of dataset.')
