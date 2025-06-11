@@ -48,6 +48,7 @@ MANIFEST
 # work dir
 work_dirs*/
 collect*/
+configs2/
 
 # jupyter related files
 .ipynb_checkpoints/

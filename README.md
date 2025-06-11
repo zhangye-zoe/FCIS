@@ -7,7 +7,7 @@
 This is the official code repository for our paper accepted at ICML 2025:
 **The Four Color Theorem for Cell Instance Segmentation**
 
-* **Paper Link:** [Read the Paper](YOUR_ACTUAL_PAPER_LINK)
+* **Paper Link:** [Read the Paper](https://openreview.net/pdf?id=VK8SuRaJfX)
 * **Publication:** International Conference on Machine Learning (ICML) 2025
 * **Authors:** Ye Zhang, Yu Zhou, Yongbing Zhang, Jianxu Chen
 
