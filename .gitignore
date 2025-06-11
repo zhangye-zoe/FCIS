@@ -69,3 +69,7 @@ configs2/
 
 # jupyter notebook files
 .ipynb_checkpoint/
+
+# other files
+setup2.cfg
+setup2.py
