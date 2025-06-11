@@ -76,3 +76,16 @@ For detailed instructions on how to download and preprocess the data, please ref
 This guide includes information on the required data structure and the scripts/notebooks located in the [`./preprocessing/`](./preprocessing/) directory.
 
 
+## 🧪 Training and Inference
+
+```bash
+python tools/train.py \
+configs/FCIS/fcis_bbbc.py
+```
+
+
+```bash
+python tools/test.py \
+configs/FCIS/fcis_bbbc.py \
+--checkpoint ./work_dirs/fcis_bbbc/latest.pth \
+```
