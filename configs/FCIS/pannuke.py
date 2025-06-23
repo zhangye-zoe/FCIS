@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'FCISPanNukeDataset'
-data_root = '/mnt/eternus/users/Ye/PanNuke/data256/mmseg'
+data_root = '/mnt/data/ISAS.DE/ye.zhang/FCIS/data/PanNuke/data256/mmseg'
 train_processes = [
     dict(type='Affine', scale=(0.8, 1.2), shear=5, rotate_degree=[-180, 180], translate_frac=(0, 0.01)),
     dict(type='RandomFlip', prob=0.5, direction='horizontal'),
@@ -36,11 +36,11 @@ data = dict(
     train=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='images/train',
-        ann_dir='fcis_inst/train',
-        adj_dir='adjacency/train',
-        dis_dir='dis/train',
-        split='train.txt',
+        img_dir='images/train4pub',
+        ann_dir='fcis_inst/train4pub',
+        adj_dir='adjacency/train4pub',
+        dis_dir='dis/train4pub',
+        split='train4pub.txt',
         processes=train_processes),
     val=dict(
         type=dataset_type,
@@ -59,10 +59,5 @@ data = dict(
         adj_dir='adjacency/test',
         dis_dir='dis/test',
         split='test.txt',
-        # img_dir='images/train',
-        # ann_dir='fcis_inst/train',
-        # adj_dir='adjacency/train',
-        # dis_dir='dis/train',
-        # split='train.txt',
         processes=test_processes),
 )

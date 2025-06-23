@@ -4,7 +4,7 @@ from .custom import CustomDataset
 
 @DATASETS.register_module()
 class PanNukeDataset(CustomDataset):
-    """DSB2018 dataset CNuclei segmentation dataset."""
+    """PanNuke dataset CNuclei segmentation dataset."""
 
     CLASSES = ('background', 'nuclei')
 

@@ -3,8 +3,8 @@ from .custom import CustomDataset
 
 
 @DATASETS.register_module()
-class TissueNetDataset(CustomDataset):
-    """TissueNet dataset CNuclei segmentation dataset."""
+class YeazDataset(CustomDataset):
+    """Yeaz dataset CNuclei segmentation dataset."""
 
     CLASSES = ('background', 'nuclei')
 

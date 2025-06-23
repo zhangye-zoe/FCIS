@@ -7,7 +7,7 @@ _base_ = [
 runner = dict(type='EpochBasedRunner', max_epochs=200)
 
 evaluation = dict(
-    interval=5,
+    interval=10,
     custom_intervals=[5],
     custom_milestones=[95],
     by_epoch=True,

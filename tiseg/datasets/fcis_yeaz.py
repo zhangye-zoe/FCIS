@@ -1,11 +1,10 @@
 from .builder import DATASETS
-# from .custom import CustomDataset
 from .fcis_custom import FCISCustomDataset
 
 
 @DATASETS.register_module()
-class FCISLiverCellDataset(FCISCustomDataset):
-    """LiverCell dataset Nuclei segmentation dataset."""
+class FCISYeazDataset(FCISCustomDataset):
+    """FCIS-YeaZ dataset Nuclei segmentation dataset."""
 
     CLASSES = ('background', 'nuclei')
 

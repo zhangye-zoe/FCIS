@@ -7,8 +7,8 @@ _base_ = [
 runner = dict(type='EpochBasedRunner', max_epochs=200)
 
 evaluation = dict(
-    interval=1,
-    custom_intervals=[1],
+    interval=10,
+    custom_intervals=[5],
     custom_milestones=[95],
     by_epoch=True,
     metric='all',
@@ -18,7 +18,7 @@ evaluation = dict(
 
 checkpoint_config = dict(
     by_epoch=True,
-    interval=5,
+    interval=20,
     max_keep_ckpts=5,
 )
 
