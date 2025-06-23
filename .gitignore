@@ -22,7 +22,7 @@ data/PanNuke
 data/Yeaz
 
 # Dataset symbolic link
-/data*
+# /data*
 
 # Vscode
 __vscode__
