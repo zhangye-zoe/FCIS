@@ -76,6 +76,21 @@ For detailed instructions on how to download and preprocess the data, please ref
 This guide includes information on the required data structure and the scripts/notebooks located in the [`./preprocessing/`](./preprocessing/) directory.
 
 
+## 🚀 Quick Start: Inference & Visualization
+
+Download the pre-trained model weights from:
+👉 [Hugging Face – FCIS Weights](https://huggingface.co/zhangye-zoe/FCIS-Weight/tree/main/checkpoints)
+
+To quickly evaluate the trained model and visualize the prediction results, run the following command:
+
+```bash
+python tools/test.py \
+configs/FCIS/fcis_bbbc.py \
+--checkpoint ./work_dirs/fcis_bbbc/fcis_bbbc.pth \
+--show
+-show-fold ./z_visual/BBBC
+```
+
 ## 🧪 Training and Inference
 
 ```bash

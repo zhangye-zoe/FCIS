@@ -8,12 +8,12 @@ try.*
 *.pth
 
 # Image
-# *.png
-# *.jpg
-# *.tif
+*.png
+*.jpg
+*.tif
 
 # Numpy
-# *.npy
+*.npy
 
 # Dataset
 data/BBBC006
@@ -22,7 +22,7 @@ data/PanNuke
 data/Yeaz
 
 # Dataset symbolic link
-# /data*
+/data*
 
 # Vscode
 __vscode__
