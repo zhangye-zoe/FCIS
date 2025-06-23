@@ -16,7 +16,10 @@ try.*
 *.npy
 
 # Dataset
-data/
+data/BBBC006
+data/DSB2018
+data/PanNuke
+data/Yeaz
 
 # Dataset symbolic link
 /data*
