@@ -1,8 +1,9 @@
 # The Four Color Theorem for Cell Instance Segmentation
 
-[![GitHub Stars](https://img.shields.io/github/stars/zhangye-zoe/FCIS.svg?style=social)](https://github.com/zhangye-zoe/FCIS/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/zhangye-zoe/FCIS.svg?style=social)](https://github.com/zhangye-zoe/FCIS/network/members)
-[![License](https://img.shields.io/github/license/zhangye-zoe/FCIS.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/zhangye-zoe/FCIS?style=social)](https://github.com/zhangye-zoe/FCIS/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/zhangye-zoe/FCIS?style=social)](https://github.com/zhangye-zoe/FCIS/network/members)
+[![License](https://img.shields.io/github/license/zhangye-zoe/FCIS)](https://github.com/zhangye-zoe/FCIS/blob/main/LICENSE)
+
 
 This is the official code repository for our paper accepted at ICML 2025:
 **The Four Color Theorem for Cell Instance Segmentation**
@@ -104,3 +105,13 @@ python tools/test.py \
 configs/FCIS/fcis_bbbc.py \
 ./work_dirs/fcis_bbbc/latest.pth \
 ```
+
+## 📖 Citation
+
+If you find our work useful, please cite our paper:
+@inproceedings{zhang2025fourcolor,
+  title={The Four Color Theorem for Cell Instance Segmentation},
+  author={Ye Zhang and Yu Zhou and Yifeng Wang and Jun Xiao and Ziyue Wang and Yongbing Zhang and Jianxu Chen},
+  booktitle={International Conference on Machine Learning (ICML)},
+  year={2025}
+}
