@@ -9,7 +9,7 @@ This is the official code repository for our paper accepted at ICML 2025:
 
 * **Paper Link:** [Read the Paper](https://openreview.net/pdf?id=VK8SuRaJfX)
 * **Publication:** International Conference on Machine Learning (ICML) 2025
-* **Authors:** Ye Zhang, Yu Zhou, Yongbing Zhang, Jianxu Chen
+* **Authors:** Ye Zhang, Yu Zhou, Yifeng Wang, Jun Xiao, Ziyue Wang, Yongbing Zhang, Jianxu Chen
 
 
 ## 🌟 Highlights
@@ -86,7 +86,7 @@ To quickly evaluate the trained model and visualize the prediction results, run 
 ```bash
 python tools/test.py \
 configs/FCIS/fcis_bbbc.py \
---checkpoint ./work_dirs/fcis_bbbc/fcis_bbbc.pth \
+./work_dirs/fcis_bbbc/fcis_bbbc.pth \
 --show
 -show-fold ./z_visual/BBBC
 ```
@@ -102,5 +102,5 @@ configs/FCIS/fcis_bbbc.py
 ```bash
 python tools/test.py \
 configs/FCIS/fcis_bbbc.py \
---checkpoint ./work_dirs/fcis_bbbc/latest.pth \
+./work_dirs/fcis_bbbc/latest.pth \
 ```
