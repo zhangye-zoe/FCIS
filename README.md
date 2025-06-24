@@ -111,7 +111,7 @@ configs/FCIS/fcis_bbbc.py \
 If you find our work useful, please cite our paper:
 ```bash
 @inproceedings{zhang2025fourcolor,
-  title={The Four Color Theorem for Cell Instance Segmentation},
+  title={The Four Color Theorem For Cell Instance Segmentation},
   author={Ye Zhang and Yu Zhou and Yifeng Wang and Jun Xiao and Ziyue Wang and Yongbing Zhang and Jianxu Chen},
   booktitle={International Conference on Machine Learning (ICML)},
   year={2025}
