@@ -442,7 +442,7 @@ def pre_eval_to_aji(pre_eval_results, nan_to_num=None):
     overall_inter = sum(pre_eval_results[0])
     overall_union = sum(pre_eval_results[1])
 
-    aji = overall_inter / overall_union
+    aji = overall_inter / (overall_union + 1e-6)
 
     ret_metrics = {'Aji': aji}
 

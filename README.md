@@ -89,7 +89,7 @@ python tools/test.py \
 configs/FCIS/fcis_bbbc.py \
 ./work_dirs/fcis_bbbc/fcis_bbbc.pth \
 --show
--show-fold ./z_visual/BBBC
+--show-fold ./z_visual/BBBC
 ```
 
 ## 🧪 Training and Inference

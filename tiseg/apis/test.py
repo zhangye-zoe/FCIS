@@ -54,7 +54,7 @@ def single_gpu_test(model, data_loader, pre_eval=False, pre_eval_args={}):
         batch_size = len(result)
         for _ in range(batch_size):
             prog_bar.update()
-    print(f"  Average inference time: {total_time/10:.4f} seconds")
+    # print(f"  Average inference time: {total_time/10:.4f} seconds")
 
     return results
 

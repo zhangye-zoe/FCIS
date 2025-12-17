@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'FCISBBBCDataset'
-data_root = '/mnt/data/ISAS.DE/ye.zhang/FCIS/data/BBBC006/data256/mmseg'
+data_root = './data/BBBC006/data256/mmseg'
 # data_root = '/mnt/data/ISAS.DE/ye.zhang/FCIS/data/example/data256/mmseg'
 train_processes = [
     dict(type='Affine', scale=(0.8, 1.2), shear=5, rotate_degree=[-180, 180], translate_frac=(0, 0.01)),

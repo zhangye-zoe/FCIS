@@ -33,7 +33,11 @@ def draw_all(save_folder,
              edge_id=2,
              sem_palette=None):
     
-    print("sem gt", np.unique(sem_gt))
+    # print("sem gt", np.unique(sem_gt))
+
+    print('inst pred', img_name)
+    print('=' * 100)
+    np.save(f"/data1/zhangye/FCIS/zy_pannuke_instmap/{img_name}.npy", inst_pred)
 
     plt.figure(figsize=(5 * 4, 5 * 2 + 3))
 

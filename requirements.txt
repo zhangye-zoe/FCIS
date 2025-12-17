@@ -13,3 +13,6 @@ scipy
 yapf
 tensorboard
 future
+opencv-python
+albumentations
+

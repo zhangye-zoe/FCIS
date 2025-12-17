@@ -16,7 +16,7 @@ try.*
 *.npy
 
 # Dataset
-data/BBBC006
+# data/BBBC006
 data/DSB2018
 data/PanNuke
 data/Yeaz
@@ -54,6 +54,8 @@ collect*/
 configs2/
 # configs/
 z_visual/
+checkpoints/
+zy_fcis_pannuke/
 
 # jupyter related files
 .ipynb_checkpoints/
@@ -74,7 +76,7 @@ z_visual/
 
 # jupyter notebook files
 .ipynb_checkpoint/
-
+.preprocessing/pannuke_processing.ipynb
 # other files
 setup2.cfg
 setup2.py
