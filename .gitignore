@@ -21,8 +21,8 @@ data/DSB2018
 data/PanNuke
 data/Yeaz
 
-# Dataset symbolic link
-/data*
+# # Dataset symbolic link
+# /data
 
 # Vscode
 __vscode__
