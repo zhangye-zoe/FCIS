@@ -44,7 +44,8 @@ pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f ht
 Installing mmcv-full with CUDA support is crucial for leveraging GPU acceleration with the OpenMMLab frameworks.
 
 ```bash
-pip install mmcv-full==1.3.13
+# pip install mmcv-full==1.3.13
+pip install mmcv-full==1.3.13 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9/index.html
 ```
 **4. Install Required Packages:**
 
@@ -75,6 +76,15 @@ For detailed instructions on how to download and preprocess the data, please ref
 [**&#x1F4C4; Data Preparation Guide**](./docs/data_prepare.md)
 
 This guide includes information on the required data structure and the scripts/notebooks located in the [`./preprocessing/`](./preprocessing/) directory.
+
+### Difference between `inst/` and `fcis_inst/`
+
+>- **`inst/*.png`**: <span style="color:#1f77b4"><b>binary encoding</b></span> (`0`: background, `1`: foreground)
+>- **`fcis_inst/*.png`**: <span style="color:#1f77b4"><b>four-color >encoding</b></span> (`0–4`),  
+>- **`inst/*.npy`** and **`fcis_inst/*.npy`**: <span style="color:#1f77b4"><b>instance ID maps</b></span>  (`0–N`)
+
+> **Note:** The `*.npy` files in both folders are identical;  
+> the difference lies **only** in the `*.png` encodings.
 
 
 ## 🚀 Quick Start: Inference & Visualization
