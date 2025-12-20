@@ -77,8 +77,9 @@ For detailed instructions on how to download and preprocess the data, please ref
 
 This guide includes information on the required data structure and the scripts/notebooks located in the [`./preprocessing/`](./preprocessing/) directory.
 
-### Difference between `inst/` and `fcis_inst/`
+## 💥 A frequently asked question
 
+> Difference between `inst/` and `fcis_inst/`
 >- **`inst/*.png`**: <span style="color:#1f77b4"><b>binary encoding</b></span> (`0`: background, `1`: foreground)
 >- **`fcis_inst/*.png`**: <span style="color:#1f77b4"><b>four-color >encoding</b></span> (`0–4`),  
 >- **`inst/*.npy`** and **`fcis_inst/*.npy`**: <span style="color:#1f77b4"><b>instance ID maps</b></span>  (`0–N`)
@@ -121,9 +122,14 @@ configs/FCIS/fcis_bbbc.py \
 If you find our work useful, please cite our paper:
 ```bash
 @inproceedings{zhang2025fourcolor,
-  title={The Four Color Theorem For Cell Instance Segmentation},
-  author={Ye Zhang and Yu Zhou and Yifeng Wang and Jun Xiao and Ziyue Wang and Yongbing Zhang and Jianxu Chen},
-  booktitle={International Conference on Machine Learning (ICML)},
-  year={2025}
+  title     = {The Four Color Theorem for Cell Instance Segmentation},
+  author    = {Zhang, Ye and Zhou, Yu and Wang, Yifeng and Xiao, Jun and Wang, Ziyue and Zhang, Yongbing and Chen, Jianxu},
+  booktitle = {Proceedings of the 42nd International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {267},
+  pages     = {77194--77215},
+  year      = {2025},
+  publisher = {PMLR}
 }
+
 ```
