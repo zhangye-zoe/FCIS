@@ -35,6 +35,8 @@ def single_gpu_test(model, data_loader, pre_eval=False, pre_eval_args={}):
             # start_time = time.time()
             
             result = model(**data)
+            print('result', results)
+            print('='*100)
 
             # end_time = time.time()
             # inference_time = end_time - start_time

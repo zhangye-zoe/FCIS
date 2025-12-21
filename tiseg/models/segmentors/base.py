@@ -275,7 +275,7 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
         img_canvas = torch.zeros((B, C, H1, W1), dtype=img.dtype, device=img.device)
         img_canvas[:, :, pad_h // 2:pad_h // 2 + H, pad_w // 2:pad_w // 2 + W] = img
 
-        sem_logit = torch.zeros((B, 2, H1, W1), dtype=img.dtype, device=img.device)
+        sem_logit = torch.zeros((B, 16, H1, W1), dtype=img.dtype, device=img.device)
         cls_logit = torch.zeros((B, self.num_classes, H1, W1), dtype=img.dtype, device=img.device)
 
         # sem_logit = torch.zeros((B, 16, H1, W1), dtype=img.dtype, device=img.device)
@@ -340,6 +340,8 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
                 # inference patch or whole img
                 if self.test_cfg.mode == 'split':
                     # if encoding is not None:
+                    # print('image', img)
+                    # print('=' * 100)
                     sem_logit, cls_logit = self.split_inference(img, meta, rescale, encoding)
                 else:
                     sem_logit = self.whole_inference(img, meta, rescale)

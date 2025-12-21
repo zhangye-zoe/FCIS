@@ -3,7 +3,7 @@
 *.log*
 *.npz
 try.*
-
+configs/FCIS/unet_pannuke.py
 # Pytorch
 *.pth
 

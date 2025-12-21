@@ -106,15 +106,15 @@ class UNetHead(nn.Module):
         
         if encoding is not None:
             device = out.device
-            print(" Using image encoding ......")
+            # print(" Using image encoding ......")
             pos_encode = encoding.repeat(out.shape[0], 1, 1, 1).to(device)
             out = torch.cat((out, pos_encode), dim=1)
 
-        # if self.num_classes is not None:
-        #     cls_pred = self.cls_layer(out)
-
         if self.num_classes is not None:
-            out = self.postprocess(out)
+            cls_pred = self.cls_layer(out)
 
-        # return out, cls_pred
-        return None, out
+        # if self.num_classes is not None:
+        #     out = self.postprocess(out)
+
+        return out, cls_pred
+        # return None, out

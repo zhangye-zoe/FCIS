@@ -35,9 +35,9 @@ def draw_all(save_folder,
     
     # print("sem gt", np.unique(sem_gt))
 
-    print('inst pred', img_name)
-    print('=' * 100)
-    np.save(f"/data1/zhangye/FCIS/zy_pannuke_instmap/{img_name}.npy", inst_pred)
+    # print('inst pred', img_name)
+    # print('=' * 100)
+    # np.save(f"/data1/zhangye/FCIS/zy_fcis_pannuke/instmap5/{img_name}.npy", inst_pred)
 
     plt.figure(figsize=(5 * 4, 5 * 2 + 3))
 
