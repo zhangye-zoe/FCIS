@@ -44,7 +44,6 @@ pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f ht
 Installing mmcv-full with CUDA support is crucial for leveraging GPU acceleration with the OpenMMLab frameworks.
 
 ```bash
-# pip install mmcv-full==1.3.13
 pip install mmcv-full==1.3.13 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9/index.html
 ```
 **4. Install Required Packages:**
@@ -122,7 +121,7 @@ configs/FCIS/fcis_bbbc.py \
 If you find our work useful, please cite our paper:
 ```bash
 @inproceedings{zhang2025fourcolor,
-  title={The Four Color Theorem for Cell Instance Segmentation},
+  title={The Four Color Theorem For Cell Instance Segmentation},
   author={Zhang, Ye and Zhou, Yu and Wang, Yifeng and Xiao, Jun and Wang, Ziyue and Zhang, Yongbing and Chen, Jianxu},
   booktitle={Proceedings of the 42nd International Conference on Machine Learning},
   series={Proceedings of Machine Learning Research},
