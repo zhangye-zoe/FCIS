@@ -1,36 +1,24 @@
-# custom
-*.json
-*.log*
-*.npz
-try.*
-configs/FCIS/unet_pannuke.py
-# Pytorch
-*.pth
+# ============================================================
+# FCIS .gitignore
+# ============================================================
 
-# Image
-*.png
-*.jpg
-*.tif
+# ------------------------------------------------------------
+# System / editor files
+# ------------------------------------------------------------
+.DS_Store
+.vscode/
+__vscode__/
+.idea/
+*.swp
+*.swo
 
-# Numpy
-*.npy
+# ------------------------------------------------------------
+# Python cache / build files
+# ------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Dataset
-# data/BBBC006
-data/DSB2018
-data/PanNuke
-data/Yeaz
-
-# # Dataset symbolic link
-# /data
-
-# Vscode
-__vscode__
-
-# Python
-__pycache__
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -48,35 +36,80 @@ wheels/
 *.egg
 MANIFEST
 
-# work dir
+# ------------------------------------------------------------
+# Logs / temporary files
+# ------------------------------------------------------------
+*.log
+*.log.*
+*.json
+*.npz
+*.p
+try.*
+setup2.py
+setup2.cfg
+
+# ------------------------------------------------------------
+# Model checkpoints / training outputs
+# ------------------------------------------------------------
+*.pth
+checkpoints/
 work_dirs*/
 collect*/
-configs2/
-# configs/
-z_visual/
-checkpoints/
 zy_fcis_pannuke/
 
-# jupyter related files
-.ipynb_checkpoints/
+# ------------------------------------------------------------
+# Data files
+# ------------------------------------------------------------
+*.npy
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
 
-# compressed files
+# ------------------------------------------------------------
+# Datasets
+# ------------------------------------------------------------
+data/DSB2018/
+data/PanNuke/
+data/Yeaz/
+# data/BBBC006/
+
+# Dataset symbolic link
+# /data
+
+# ------------------------------------------------------------
+# Project-specific generated folders
+# ------------------------------------------------------------
+configs2/
+z_visual/
+visualization/
+.*_show
+
+# ------------------------------------------------------------
+# Config files not intended for release
+# ------------------------------------------------------------
+configs/FCIS/unet_pannuke.py
+
+# ------------------------------------------------------------
+# Jupyter files
+# ------------------------------------------------------------
+.ipynb_checkpoints/
+.ipynb_checkpoint/
+preprocessing/pannuke_processing.ipynb
+
+# ------------------------------------------------------------
+# Compressed files
+# ------------------------------------------------------------
 *.zip
 *.rar
 *.tar
+*.tar.gz
+*.tgz
+*.7z
 
-# visualization files
-.*_show
-
-# pickle sequence file
-*.p
-
-# root folder txt files
-/*.txt
-
-# jupyter notebook files
-.ipynb_checkpoint/
-.preprocessing/pannuke_processing.ipynb
-# other files
-setup2.cfg
-setup2.py
+# ------------------------------------------------------------
+# Root-level text files
+# Uncomment if you really want to ignore root txt files
+# ------------------------------------------------------------
+# /*.txt

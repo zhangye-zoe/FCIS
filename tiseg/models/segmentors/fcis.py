@@ -114,7 +114,7 @@ class FCISNet(BaseSegmentor):
 
             # Encourage pixels from the same GT instance to have consistent
             # four-color probabilities. This reduces fragmented predictions.
-            intra_weight = self.train_cfg.get('intra_loss_weight', 0.0)
+            intra_weight = self.train_cfg.get('intra_loss_weight', 0.1)
             if intra_weight > 0:
                 intra_loss = self._intra_instance_consistency_loss(inter_pred, ins_gt)
                 loss['intra_consistency_loss'] = intra_weight * intra_loss

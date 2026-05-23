@@ -106,9 +106,10 @@ class UNetLabelMake(object):
         data['sem_gt'] = sem_gt
 
         # import matplotlib.pyplot as plt
-        # plt.imshow(inst_gt)
+        # print('sem gt', np.unique(sem_gt), sem_gt.shape)
+        # plt.imshow(sem_gt[0,0,...])
         # plt.show()
-        # plt.savefig("z_gt.png")
+        # plt.savefig("z_sem_gt.png")
 
         # setting 1 boundary pix of each instance to background
         inst_gt = self._remove_1px_boundary(inst_gt)
