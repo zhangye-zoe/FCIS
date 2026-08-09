@@ -1,3 +1,5 @@
+
+
 # The Four Color Theorem for Cell Instance Segmentation
 
 [![GitHub stars](https://img.shields.io/github/stars/zhangye-zoe/FCIS?style=flat&logo=github)](https://github.com/zhangye-zoe/FCIS/stargazers)
@@ -80,7 +82,7 @@ This guide includes information on the required data structure and the scripts/n
 
 > Difference between `inst/` and `fcis_inst/`
 >- **`inst/*.png`**: <span style="color:#1f77b4"><b>binary encoding</b></span> (`0`: background, `1`: foreground)
->- **`fcis_inst/*.png`**: <span style="color:#1f77b4"><b>four-color encoding</b></span> (`0–4`),  
+>- **`fcis_inst/*.png`**: <span style="color:#1f77b4"><b>four-color encoding</b></span> (`0–4`)
 >- **`inst/*.npy`** and **`fcis_inst/*.npy`**: <span style="color:#1f77b4"><b>instance ID maps</b></span>  (`0–N`)
 
 > **Note:** The `*.npy` files in both folders are identical;  
