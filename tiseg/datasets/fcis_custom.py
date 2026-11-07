@@ -116,6 +116,7 @@ def draw_all(
 
     plt.tight_layout()
     plt.savefig(f"{save_folder}/{img_name}_compare.png", dpi=300)
+    np.save(f'{save_folder}/{img_name}.npy', inst_pred)
 
 
 @DATASETS.register_module()

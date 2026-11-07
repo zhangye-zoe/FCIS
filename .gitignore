@@ -1,9 +1,5 @@
-# ============================================================
-# FCIS .gitignore
-# ============================================================
-
 # ------------------------------------------------------------
-# System / editor files
+# 1. System and Editor Files
 # ------------------------------------------------------------
 .DS_Store
 .vscode/
@@ -12,8 +8,9 @@ __vscode__/
 *.swp
 *.swo
 
+
 # ------------------------------------------------------------
-# Python cache / build files
+# 2. Python Cache and Build Artifacts
 # ------------------------------------------------------------
 __pycache__/
 *.py[cod]
@@ -36,29 +33,32 @@ wheels/
 *.egg
 MANIFEST
 
+
 # ------------------------------------------------------------
-# Logs / temporary files
+# 3. Logs and Temporary Files
 # ------------------------------------------------------------
 *.log
 *.log.*
 *.json
 *.npz
 *.p
+
 try.*
 setup2.py
 setup2.cfg
 
+
 # ------------------------------------------------------------
-# Model checkpoints / training outputs
+# 4. Model Checkpoints and Training Outputs
 # ------------------------------------------------------------
 *.pth
 checkpoints/
 work_dirs*/
 collect*/
-zy_fcis_pannuke/
+
 
 # ------------------------------------------------------------
-# Data files
+# 5. Data and Image Files
 # ------------------------------------------------------------
 *.npy
 *.png
@@ -67,39 +67,48 @@ zy_fcis_pannuke/
 *.tif
 *.tiff
 
+
 # ------------------------------------------------------------
-# Datasets
+# 6. Datasets and External Storage
 # ------------------------------------------------------------
 data/DSB2018/
 data/PanNuke/
 data/Yeaz/
+
+# Optional dataset
 # data/BBBC006/
 
-# Dataset symbolic link
-# /data
+# Root-level directories and symbolic links
+/data2/
+/preprocessing2/
+/configs2/
+
 
 # ------------------------------------------------------------
-# Project-specific generated folders
+# 7. Project-specific Generated Files
 # ------------------------------------------------------------
 configs2/
 z_visual/
 visualization/
 .*_show
 
+
 # ------------------------------------------------------------
-# Config files not intended for release
+# 8. Local Configuration Files
 # ------------------------------------------------------------
 configs/FCIS/unet_pannuke.py
 
+
 # ------------------------------------------------------------
-# Jupyter files
+# 9. Jupyter Notebook Files
 # ------------------------------------------------------------
 .ipynb_checkpoints/
 .ipynb_checkpoint/
 preprocessing/pannuke_processing.ipynb
 
+
 # ------------------------------------------------------------
-# Compressed files
+# 10. Compressed Archives
 # ------------------------------------------------------------
 *.zip
 *.rar
@@ -107,9 +116,3 @@ preprocessing/pannuke_processing.ipynb
 *.tar.gz
 *.tgz
 *.7z
-
-# ------------------------------------------------------------
-# Root-level text files
-# Uncomment if you really want to ignore root txt files
-# ------------------------------------------------------------
-# /*.txt

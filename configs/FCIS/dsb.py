@@ -53,10 +53,10 @@ data = dict(
     test=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='images/test',
-        ann_dir='fcis_inst/test',
-        adj_dir='adjacency/test',
-        dis_dir='dis/test',
-        split='test.txt',
+        img_dir='images/test_wo_split',
+        ann_dir='fcis_inst/test_wo_split',
+        adj_dir='adjacency/test_wo_split',
+        dis_dir='dis/test_wo_split',
+        split='test_wo_split.txt',
         processes=test_processes),
 )

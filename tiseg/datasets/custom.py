@@ -105,6 +105,7 @@ def draw_all(save_folder,
     # results visulization
     plt.tight_layout()
     plt.savefig(f'{save_folder}/{img_name}_compare.png', dpi=300)
+    
 
 
 @DATASETS.register_module()
